@@ -37,8 +37,21 @@ function getIntervalArray(start, end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const { length: arr1Length } = arr1;
+  const { length: arr2Length } = arr2;
+
+  const sum = (longest, shortest) =>
+    longest.reduce((acc, curr, i) => [...acc, curr + (shortest[i] || 0)], []);
+
+  if (arr1Length === arr2Length) {
+    return sum(arr1, arr2);
+  }
+
+  const longest = arr1Length > arr2Length ? arr1 : arr2;
+  const shortest = arr1Length < arr2Length ? arr1 : arr2;
+
+  return sum(longest, shortest);
 }
 
 /**
